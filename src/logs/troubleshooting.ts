@@ -52,6 +52,7 @@ export interface DalamudTroubleshooting {
   Language: string;
 
   DoDalamudTest: boolean;
+  DoPluginTest: boolean;
   BetaKey: string | null;
   InterfaceLoaded: boolean;
   ForcedMinHook: boolean;

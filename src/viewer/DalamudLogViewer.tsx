@@ -97,7 +97,7 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
     );
   }
 
-  if (troubleshooting.DoDalamudTest) {
+  if (troubleshooting.DoPluginTest) {
     warnings.push(
       "Dalamud plugin testing is enabled. Please make sure that any potential bugs are not plugin testing related."
     );

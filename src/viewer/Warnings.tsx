@@ -1,5 +1,9 @@
 export function Warnings(props: { problems: string[] }) {
-  const problems = props.problems.map((x) => <li>{x}</li>);
+  const problems = [];
+  for (let i = 0; i < props.problems.length; i++) {
+    const problem = props.problems[i];
+    problems.push(<li key={i}>{problem}</li>);
+  }
 
   return (
     <div>
