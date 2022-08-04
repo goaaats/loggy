@@ -9,12 +9,19 @@ import { Buffer } from "buffer";
 export interface Log {
   xlLog: LogFile<XLTroubleshooting> | null;
   dalamudLog: LogFile<DalamudTroubleshooting> | null;
+
+  files: ZipFile[];
 }
 
-interface LogFile<T> {
+export interface LogFile<T> {
   data: string;
   troubleshooting: T | null;
   exception: ExceptionTroubleshooting | null;
+}
+
+export interface ZipFile {
+  name: string;
+  data: string;
 }
 
 const dalamudRegex = /TROUBLESHOOTING:(.*)/gu;
@@ -54,12 +61,23 @@ export async function parseLog(data: ArrayBuffer): Promise<Log> {
   const zip = new JSZip();
   await zip.loadAsync(data);
 
+  const files: ZipFile[] = [];
+  for (const [filename, file] of Object.entries(zip.files)) {
+    if (filename.endsWith(".log")) {
+      files.push({
+        name: filename,
+        data: await file.async("string")
+      });
+    }
+  }
+
   return {
     xlLog: await getLogFile<XLTroubleshooting>(zip, "output.log", xlRegex),
     dalamudLog: await getLogFile<DalamudTroubleshooting>(
       zip,
       "dalamud.log",
       dalamudRegex
-    )
+    ),
+    files
   };
 }

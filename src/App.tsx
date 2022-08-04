@@ -54,7 +54,7 @@ function App() {
   }
 
   return (
-    <div className="App max-w-full m-2">
+    <div className="App max-w-full overflow-wrap ">
       {log == null ? fileUpload : <LogViewer log={log} />}
     </div>
   );
