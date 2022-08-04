@@ -10,7 +10,7 @@ export function RawLog(props: RawLogProps) {
   return (
     <div>
       <button
-        className="rounded-none bg-indigo-500"
+        className="rounded-md bg-indigo-500 text-white p-2"
         onClick={() => {
           if (pre.current !== null) pre.current.scrollIntoView(false);
         }}
