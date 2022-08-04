@@ -116,6 +116,8 @@ export function XLLogViewer(props: XLLogViewerProps) {
         </ul>
       </div>
 
+      <br />
+
       {warnings.length > 0 && <Warnings problems={warnings} />}
       {exceptionEl != null && (
         <div>

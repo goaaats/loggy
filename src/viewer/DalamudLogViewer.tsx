@@ -128,6 +128,8 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
         </ul>
       </div>
 
+      <br />
+
       {warnings.length > 0 && <Warnings problems={warnings} />}
       {exceptionEl != null && (
         <div>
