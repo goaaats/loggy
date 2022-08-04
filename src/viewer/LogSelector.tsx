@@ -9,12 +9,12 @@ export function useLogSelector(files: ZipFile[]) {
   for (const file of files) {
     options.push(
       <li key={file.name}>
-        <a
-          className="flex items-center px-4 py-2 mt-1 text-gray-600 rounded-md hover:bg-gray-200"
+        <button
+          className="flex items-center py-2 mt-1 text-gray-600 rounded-md hover:bg-gray-200"
           onClick={() => setSelectedLog(file.name)}
         >
           <span className="mx-4 font-medium">{file.name}</span>
-        </a>
+        </button>
       </li>
     );
   }

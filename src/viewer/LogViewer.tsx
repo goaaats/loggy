@@ -1,4 +1,3 @@
-//import { useState } from "react";
 import { Log } from "../logs/parseLog";
 import { DalamudLogViewer } from "./DalamudLogViewer";
 import { useLogSelector } from "./LogSelector";
