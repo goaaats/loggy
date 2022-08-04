@@ -2,8 +2,8 @@
 import { Log } from "../logs/parseLog";
 import { DalamudLogViewer } from "./DalamudLogViewer";
 import { useLogSelector } from "./LogSelector";
-import "./LogViewer.css";
 import { RawLog } from "./RawLog";
+import { XLLogViewer } from "./XLLogViewer";
 
 interface LogViewerProps {
   log: Log;
@@ -17,6 +17,9 @@ export function LogViewer(props: LogViewerProps) {
   switch (selectedLog) {
     case "dalamud.log":
       el = <DalamudLogViewer log={log.dalamudLog!} />;
+      break;
+    case "output.log":
+      el = <XLLogViewer log={log.xlLog!} />;
       break;
     default:
       if (selectedLog == null) {

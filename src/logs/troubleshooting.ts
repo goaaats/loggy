@@ -75,7 +75,7 @@ export enum IndexIntegrity {
   Success = 5
 }
 
-export enum Platfom {
+export enum Platform {
   Windows = 0,
   WindowsOnLinux = 1,
   Linux = 2
@@ -106,7 +106,7 @@ export interface XLTroubleshooting {
   Official: boolean;
 
   DpiAwareness: number;
-  Platform: Platfom;
+  Platform: Platform;
 
   ObservedGameVersion: string;
   ObservedEx1Version: string;
