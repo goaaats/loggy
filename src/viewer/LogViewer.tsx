@@ -15,10 +15,24 @@ export function LogViewer(props: LogViewerProps) {
   let el;
   switch (selectedLog) {
     case "dalamud.log":
-      el = <DalamudLogViewer log={log.dalamudLog!} />;
+      el = (
+        <>
+          <DalamudLogViewer log={log.dalamudLog!} />
+          <h2 className="text-xl">Log</h2>
+          <hr />
+          <RawLog log={log.dalamudLog!.data} />
+        </>
+      );
       break;
     case "output.log":
-      el = <XLLogViewer log={log.xlLog!} />;
+      el = (
+        <>
+          <XLLogViewer log={log.xlLog!} />
+          <h2 className="text-xl">Log</h2>
+          <hr />
+          <RawLog log={log.xlLog!.data} />
+        </>
+      );
       break;
     default:
       if (selectedLog == null) {

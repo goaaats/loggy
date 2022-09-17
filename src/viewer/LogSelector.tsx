@@ -20,7 +20,7 @@ export function useLogSelector(files: ZipFile[]) {
   }
 
   return [
-    <div className="flex flex-col w-1/6 h-screen px-4 py-8 overflow-y-auto border-r">
+    <div className="flex flex-col w-1/6 h-screen px-4 py-8 mr-1 overflow-y-auto border-r">
       <div className="flex flex-col justify-between">
         <aside>
           <ul>{options}</ul>

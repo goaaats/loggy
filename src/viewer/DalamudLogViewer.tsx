@@ -49,7 +49,8 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
     null,
     "",
     "https://kamori.goats.dev/Plugin/PluginMaster",
-    "https://raw.githubusercontent.com/goatcorp/DalamudPlugins/api6/pluginmaster.json"
+    "https://raw.githubusercontent.com/goatcorp/DalamudPlugins/api6/pluginmaster.json",
+    "OFFICIAL"
   ];
 
   const plugins: Plugin[] = [];

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Log, parseLog } from "./logs/parseLog";
 import { LogViewer } from "./viewer/LogViewer";
+import { Buffer } from "buffer";
 import "./App.css";
 
 function useFileUpload(): [JSX.Element, ArrayBuffer | undefined] {
@@ -47,14 +48,28 @@ function useLog(fileBuf: ArrayBuffer | undefined): Log | undefined {
 
 function App() {
   const [fileUpload, fileBuf] = useFileUpload();
-  const log = useLog(fileBuf);
+  const [urlBuf, setUrlBuf] = useState<ArrayBuffer>();
 
-  if (log == null) {
-    return <div className="App">{fileUpload}</div>;
-  }
+  const log = useLog(fileBuf || urlBuf);
+
+  const params = new URL(document.location.toString()).searchParams;
+  const logURL = params.get("url");
+
+  useEffect(() => {
+    async function getLog() {
+      if (logURL !== null) {
+        const url = Buffer.from(logURL, "base64").toString();
+        const req = await fetch(url, { mode: "cors" });
+        const log = await req.arrayBuffer();
+        setUrlBuf(log);
+      }
+    }
+
+    getLog();
+  }, []);
 
   return (
-    <div className="App max-w-full overflow-wrap">
+    <div className="App max-w-full overflow-wrap m-2">
       {log == null ? fileUpload : <LogViewer log={log} />}
     </div>
   );

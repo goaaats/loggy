@@ -8,7 +8,7 @@ export function RawLog(props: RawLogProps) {
   const pre = useRef<HTMLPreElement>(null);
 
   return (
-    <div className="p-2">
+    <div>
       <button
         className="rounded-md bg-indigo-500 text-white p-2"
         onClick={() => {

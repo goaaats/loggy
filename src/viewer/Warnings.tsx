@@ -7,7 +7,7 @@ export function Warnings(props: { problems: string[] }) {
 
   return (
     <div>
-      <h2 className="text-xl">Problems</h2>
+      <h2 className="text-xl">Warnings</h2>
       <hr />
       <ul className="list-disc list-inside">{problems}</ul>
       <br />
