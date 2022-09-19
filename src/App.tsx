@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Log, parseLog } from "./logs/parseLog";
 import { LogViewer } from "./viewer/LogViewer";
 import { Buffer } from "buffer";
+import { decode } from "url-safe-base64";
 import "./App.css";
 
 function useFileUpload(): [JSX.Element, ArrayBuffer | undefined] {
@@ -58,7 +59,7 @@ function App() {
   useEffect(() => {
     async function getLog() {
       if (logURL !== null) {
-        const url = Buffer.from(logURL, "base64").toString();
+        const url = Buffer.from(decode(logURL), "base64").toString();
         const req = await fetch(url, { mode: "cors" });
         const log = await req.arrayBuffer();
         setUrlBuf(log);

@@ -82,10 +82,6 @@ export function XLLogViewer(props: XLLogViewerProps) {
             Encrypted arguments:{" "}
             {troubleshooting.EncryptArguments ? "true" : "false"}
           </li>
-          <li>
-            Steam integration:{" "}
-            {troubleshooting.SteamIntegration ? "true" : "false"}
-          </li>
           <li>UID cache: {troubleshooting.IsUidCache ? "true" : "false"}</li>
           <li>
             Dalamud enabled: {troubleshooting.DalamudEnabled ? "true" : "false"}

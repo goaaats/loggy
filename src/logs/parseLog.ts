@@ -72,7 +72,9 @@ export async function parseLog(data: ArrayBuffer): Promise<Log> {
   }
 
   return {
-    xlLog: await getLogFile<XLTroubleshooting>(zip, "output.log", xlRegex),
+    xlLog: zip.file("output.log") !== null
+      ? await getLogFile<XLTroubleshooting>(zip, "output.log", xlRegex)
+      : await getLogFile<XLTroubleshooting>(zip, "launcher.log", xlRegex),
     dalamudLog: await getLogFile<DalamudTroubleshooting>(
       zip,
       "dalamud.log",
