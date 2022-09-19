@@ -34,6 +34,16 @@ export function LogViewer(props: LogViewerProps) {
         </>
       );
       break;
+    case "launcher.log":
+      el = (
+        <>
+          <XLLogViewer log={log.xlLog!} />
+          <h2 className="text-xl">Log</h2>
+          <hr />
+          <RawLog log={log.xlLog!.data} />
+        </>
+      );
+      break;
     default:
       if (selectedLog == null) {
         el = <p>Select a log to start!</p>;

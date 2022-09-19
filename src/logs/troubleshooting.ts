@@ -79,7 +79,8 @@ export enum IndexIntegrity {
 export enum Platform {
   Windows = 0,
   WindowsOnLinux = 1,
-  Linux = 2
+  Linux = 2,
+  MacOS = 3
 }
 
 export enum DalamudLoadMethod {
