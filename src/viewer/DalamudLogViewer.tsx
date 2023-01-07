@@ -1,7 +1,6 @@
 import { LogFile } from "../logs/parseLog";
 import { DalamudTroubleshooting } from "../logs/troubleshooting";
 import { Warnings } from "./Warnings";
-import { RawLog } from "./RawLog";
 
 interface Plugin {
   name: string;
@@ -42,7 +41,7 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
   const log = props.log;
   const troubleshooting = log.troubleshooting;
   if (troubleshooting == null) {
-    return <RawLog log={log.data} />;
+    return <div>No troubleshooting detected.</div>;
   }
 
   const pluginSources = [
@@ -77,7 +76,7 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
       <div>
         <h2 className="text-xl">Exception</h2>
         <hr />
-        <pre className="break-normal whitespace-normal bg-slate-600 text-slate-200 p-1 rounded">
+        <pre className="break-normal whitespace-pre-line bg-slate-600 text-slate-200 p-1 rounded">
           {exception.Info}
         </pre>
         <p>at {exceptionTime}</p>

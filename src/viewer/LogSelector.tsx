@@ -1,8 +1,12 @@
-import { useState } from "react";
+// eslint-disable-next-line
+import React, { ReactElement, useState } from "react";
 // eslint-disable-next-line
 import { ZipFile } from "../logs/parseLog";
 
-export function useLogSelector(files: ZipFile[]) {
+export function useLogSelector(
+  files: ZipFile[],
+  mobile: boolean
+): [JSX.Element, string | null] {
   const [selectedLog, setSelectedLog] = useState<string | null>(null);
 
   const options = [];
@@ -19,8 +23,17 @@ export function useLogSelector(files: ZipFile[]) {
     );
   }
 
+  if (mobile) {
+    return [
+      <div>
+        <ul>{options}</ul>
+      </div>,
+      selectedLog
+    ];
+  }
+
   return [
-    <div className="flex flex-col w-1/6 h-screen px-4 py-8 mr-1 overflow-y-auto border-r">
+    <div className="flex flex-col h-screen px-4 py-8 mr-1 border-r">
       <div className="flex flex-col justify-between">
         <aside>
           <ul>{options}</ul>

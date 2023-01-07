@@ -8,7 +8,7 @@ export function RawLog(props: RawLogProps) {
   const pre = useRef<HTMLPreElement>(null);
 
   return (
-    <div>
+    <div className="w-100 overflow-clip">
       <button
         className="rounded-md bg-indigo-500 text-white p-2"
         onClick={() => {
@@ -18,7 +18,7 @@ export function RawLog(props: RawLogProps) {
         Scroll to bottom
       </button>
       <pre
-        className="break-normal whitespace-pre-line overflow-x-scroll bg-slate-600 text-slate-200 p-2 mt-3 rounded"
+        className="break-words whitespace-pre-line bg-slate-600 text-slate-200 p-2 mt-3 rounded overflow-hidden"
         ref={pre}
       >
         {props.log}

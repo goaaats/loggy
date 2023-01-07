@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Log } from "../logs/parseLog";
 import { DalamudLogViewer } from "./DalamudLogViewer";
 import { useLogSelector } from "./LogSelector";
@@ -9,8 +10,24 @@ interface LogViewerProps {
 }
 
 export function LogViewer(props: LogViewerProps) {
+  // shamelessly stolen from stackoverflow
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowSizeChange);
+    return () => {
+      window.removeEventListener("resize", handleWindowSizeChange);
+    };
+  }, []);
+
   const log = props.log;
-  const [logSelector, selectedLog] = useLogSelector(log.files);
+  const mobile = width <= 768;
+
+  const [logSelector, selectedLog] = useLogSelector(log.files, mobile);
 
   let el;
   switch (selectedLog) {
@@ -55,10 +72,21 @@ export function LogViewer(props: LogViewerProps) {
       break;
   }
 
+  if (mobile) {
+    return (
+      <div className="flex flex-col w-100 overflow-hidden">
+        <div className="mb-1">{logSelector}</div>
+        <hr />
+        {el}
+      </div>
+    );
+  }
+
   return (
-    <div className="flex">
+    <div className="flex flex-row w-100 overflow-auto">
       {logSelector}
-      <div className="w-5/6">{el}</div>
+
+      <div className="flex flex-col w-100 overflow-hidden">{el}</div>
     </div>
   );
 }

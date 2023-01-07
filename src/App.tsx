@@ -70,7 +70,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App max-w-full overflow-wrap m-2">
+    <div className="App m-2">
       {log == null ? fileUpload : <LogViewer log={log} />}
     </div>
   );
