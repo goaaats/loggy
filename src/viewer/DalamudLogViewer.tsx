@@ -1,5 +1,5 @@
 import { LogFile } from "../logs/parseLog";
-import { DalamudTroubleshooting } from "../logs/troubleshooting";
+import { DalamudTroubleshooting, PluginState } from "../logs/troubleshooting";
 import { Warnings } from "./Warnings";
 
 interface Plugin {
@@ -8,6 +8,7 @@ interface Plugin {
   version: string;
   thirdParty: boolean;
   repoUrl: string | null;
+  loadState: PluginState;
 }
 
 export function PluginList(props: { plugins: Plugin[] }) {
@@ -16,18 +17,47 @@ export function PluginList(props: { plugins: Plugin[] }) {
   return (
     <div>
       <ul className="list-disc list-inside">
-        {plugins.map((x) => (
-          <li key={x.internalName}>
-            {x.repoUrl != null ? (
-              <a className="underline text-sky-500" href={x.repoUrl}>
-                {x.name}
-              </a>
-            ) : (
-              x.name
-            )}{" "}
-            - {x.version ?? "unknown"}
-          </li>
-        ))}
+        {plugins.map((x) => {
+          let emoji = "\u2753";
+          let tooltip = x.loadState.toString();
+
+          switch (x.loadState) {
+            case PluginState.Loading:
+            case PluginState.Loaded:
+              emoji = "\u2705";
+              break;
+
+            case PluginState.Unloading:
+            case PluginState.Unloaded:
+              emoji = "\u274C";
+              break;
+
+            case PluginState.LoadError:
+            case PluginState.UnloadError:
+              emoji = "\u26A0";
+              break;
+
+            case PluginState.Banned:
+              emoji = "\u26D4";
+              break;
+
+            default:
+              break;
+          }
+
+          return (
+            <li key={x.internalName}>
+              {x.repoUrl != null ? (
+                <a className="underline text-sky-500" href={x.repoUrl}>
+                  {x.name}
+                </a>
+              ) : (
+                x.name
+              )}{" "}
+              - {x.version ?? "unknown"} - <span title={tooltip}>{emoji}</span>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -61,7 +91,9 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
       thirdParty:
         !pluginSources.includes(plugin.InstalledFromUrl) ||
         plugin.DownloadLinkInstall === null,
-      repoUrl: plugin.RepoUrl
+      repoUrl: plugin.RepoUrl,
+      loadState:
+        troubleshooting.PluginStates[plugin.InternalName] ?? PluginState.Unknown
     });
   }
 

@@ -45,6 +45,8 @@ export interface PluginInfo {
 
 export interface DalamudTroubleshooting {
   LoadedPlugins: PluginInfo[];
+  PluginStates: Record<string, PluginState>;
+  EverStartedLoadingPlugins: string[];
 
   DalamudVersion: string;
   DalamudGitHash: string;
@@ -87,6 +89,18 @@ export enum DalamudLoadMethod {
   Entrypoint,
   DLLInject,
   ACLOnly
+}
+
+export enum PluginState {
+  Unloaded = "Unloaded",
+  UnloadError = "UnloadError",
+  Unloading = "Unloading",
+  Loaded = "Loaded",
+  LoadError = "LoadError",
+  Loading = "Loading",
+  DependencyResolutionFailed = "DependencyResolutionFailed",
+  Banned = "Banned",
+  Unknown = "Unknown"
 }
 
 export interface XLTroubleshooting {
