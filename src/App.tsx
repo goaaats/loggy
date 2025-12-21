@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { Log, parseLog } from "./logs/parseLog";
-import { LogViewer } from "./viewer/LogViewer";
 import { Buffer } from "buffer";
+import React, { useEffect, useState } from "react";
 import { decode } from "url-safe-base64";
 import "./App.css";
+import { Log, parseLog } from "./logs/parseLog";
+import { LogViewer } from "./viewer/LogViewer";
 
-function useFileUpload(): [JSX.Element, ArrayBuffer | undefined] {
+function useFileUpload(): [React.JSX.Element, ArrayBuffer | undefined] {
   const [file, setFile] = useState<File>();
   const [fileBuf, setFileBuf] = useState<ArrayBuffer>();
 

@@ -2,11 +2,11 @@ import { LogFile } from "../logs/parseLog";
 import {
   DalamudLoadMethod,
   IndexIntegrity,
+  Platform,
   XLTroubleshooting
 } from "../logs/troubleshooting";
-import { Warnings } from "./Warnings";
 import { RawLog } from "./RawLog";
-import { Platform } from "../logs/troubleshooting";
+import { Warnings } from "./Warnings";
 
 interface XLLogViewerProps {
   log: LogFile<XLTroubleshooting>;
@@ -105,6 +105,7 @@ export function XLLogViewer(props: XLLogViewerProps) {
           <li>Stormblood: {troubleshooting.ObservedEx2Version}</li>
           <li>Shadowbringers: {troubleshooting.ObservedEx3Version}</li>
           <li>Endwalker: {troubleshooting.ObservedEx4Version}</li>
+          <li>Dawntrail: {troubleshooting.ObservedEx5Version}</li>
           <li>
             Index integrity: {IndexIntegrity[troubleshooting.IndexIntegrity]}
           </li>
