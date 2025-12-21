@@ -76,7 +76,6 @@ export function XLLogViewer(props: XLLogViewerProps) {
           <br />
 
           <li>Autologin: {troubleshooting.IsAutoLogin ? "true" : "false"}</li>
-          <li>DirectX: {troubleshooting.IsDx11 ? "DX11" : "DX9"}</li>
           <li>DPI aware: {troubleshooting.DpiAwareness ? "true" : "false"}</li>
           <li>
             Encrypted arguments:{" "}
