@@ -1,12 +1,12 @@
 // eslint-disable-next-line
-import React, { ReactElement, useState } from "react";
+import React, { useState } from "react";
 // eslint-disable-next-line
 import { ZipFile } from "../logs/parseLog";
 
 export function useLogSelector(
   files: ZipFile[],
   mobile: boolean
-): [JSX.Element, string | null] {
+): [React.JSX.Element, string | null] {
   const [selectedLog, setSelectedLog] = useState<string | null>(null);
 
   const options = [];

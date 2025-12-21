@@ -105,7 +105,6 @@ export enum PluginState {
 
 export interface XLTroubleshooting {
   When: string;
-  IsDx11: boolean;
   IsAutoLogin: boolean;
   IsUidCache: boolean;
 
@@ -129,6 +128,7 @@ export interface XLTroubleshooting {
   ObservedEx2Version: string;
   ObservedEx3Version: string;
   ObservedEx4Version: string;
+  ObservedEx5Version: string;
   BckMatch: boolean;
   IndexIntegrity: IndexIntegrity;
 }
