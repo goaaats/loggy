@@ -26,7 +26,6 @@ export function LogViewer(props: LogViewerProps) {
 
   const log = props.log;
   const mobile = width <= 768;
-
   const [logSelector, selectedLog] = useLogSelector(log.files, mobile);
 
   let el;
@@ -74,19 +73,18 @@ export function LogViewer(props: LogViewerProps) {
 
   if (mobile) {
     return (
-      <div className="flex flex-col w-100 overflow-hidden">
-        <div className="mb-1">{logSelector}</div>
-        <hr />
-        {el}
+      <div className="flex flex-col w-full h-screen overflow-hidden p-2">
+        <div className="flex-shrink-0 mb-2 overflow-auto">{logSelector}</div>
+        <hr className="mb-2" />
+        <div className="flex-1 min-h-0">{el}</div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-row w-100 overflow-auto">
+    <div className="flex flex-row w-full h-screen overflow-hidden">
       {logSelector}
-
-      <div className="flex flex-col w-100 overflow-hidden">{el}</div>
+      <div className="flex-1 min-w-0 overflow-auto p-4">{el}</div>
     </div>
   );
 }

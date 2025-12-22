@@ -1,7 +1,6 @@
 import { Buffer } from "buffer";
 import React, { useEffect, useState } from "react";
 import { decode } from "url-safe-base64";
-import "./App.css";
 import { Log, parseLog } from "./logs/parseLog";
 import { LogViewer } from "./viewer/LogViewer";
 
@@ -14,7 +13,6 @@ function useFileUpload(): [React.JSX.Element, ArrayBuffer | undefined] {
       const arrayBuf = await file?.arrayBuffer();
       setFileBuf(arrayBuf);
     }
-
     if (file) getFileBuf();
   }, [file]);
 
@@ -40,7 +38,6 @@ function useLog(fileBuf: ArrayBuffer | undefined): Log | undefined {
       const log = await parseLog(fileBuf!);
       setLog(log);
     }
-
     if (fileBuf != null) getLog();
   }, [fileBuf]);
 
@@ -50,7 +47,6 @@ function useLog(fileBuf: ArrayBuffer | undefined): Log | undefined {
 function App() {
   const [fileUpload, fileBuf] = useFileUpload();
   const [urlBuf, setUrlBuf] = useState<ArrayBuffer>();
-
   const log = useLog(fileBuf || urlBuf);
 
   const params = new URL(document.location.toString()).searchParams;
@@ -65,13 +61,16 @@ function App() {
         setUrlBuf(log);
       }
     }
-
     getLog();
   }, []);
 
   return (
-    <div className="App m-2">
-      {log == null ? fileUpload : <LogViewer log={log} />}
+    <div className="h-screen w-screen overflow-hidden">
+      {log == null ? (
+        <div className="m-2">{fileUpload}</div>
+      ) : (
+        <LogViewer log={log} />
+      )}
     </div>
   );
 }
