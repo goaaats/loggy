@@ -9,7 +9,6 @@ import {
 export interface Log {
   xlLog: LogFile<XLTroubleshooting> | null;
   dalamudLog: LogFile<DalamudTroubleshooting> | null;
-
   files: ZipFile[];
 }
 
@@ -37,7 +36,6 @@ function getLog<T>(log: string, regex: RegExp): T | null {
     const data: T = JSON.parse(buffer.toString("utf8"));
     return data;
   }
-
   return null;
 }
 
