@@ -55,6 +55,14 @@ async function getLogFile<T>(
   };
 }
 
+async function getJsonFile<T>(zip: JSZip, path: string): Promise<T | null> {
+  const file = zip.file(path);
+  if (!file) return null;
+
+  const log = await file.async("string");
+  return JSON.parse(log);
+}
+
 export async function parseLog(data: ArrayBuffer): Promise<Log> {
   const zip = new JSZip();
   await zip.loadAsync(data);
@@ -69,16 +77,27 @@ export async function parseLog(data: ArrayBuffer): Promise<Log> {
     }
   }
 
-  return {
-    xlLog:
-      zip.file("output.log") !== null
-        ? await getLogFile<XLTroubleshooting>(zip, "output.log", xlRegex)
-        : await getLogFile<XLTroubleshooting>(zip, "launcher.log", xlRegex),
-    dalamudLog: await getLogFile<DalamudTroubleshooting>(
+  const xlLog =
+    zip.file("output.log") !== null
+      ? await getLogFile<XLTroubleshooting>(zip, "output.log", xlRegex)
+      : await getLogFile<XLTroubleshooting>(zip, "launcher.log", xlRegex);
+
+  const dalamudLog = await getLogFile<DalamudTroubleshooting>(
+    zip,
+    "dalamud.log",
+    dalamudRegex
+  );
+
+  if (dalamudLog != null && dalamudLog.troubleshooting == null) {
+    dalamudLog.troubleshooting = await getJsonFile<DalamudTroubleshooting>(
       zip,
-      "dalamud.log",
-      dalamudRegex
-    ),
+      "dalamud.troubleshooting.json"
+    );
+  }
+
+  return {
+    xlLog,
+    dalamudLog,
     files
   };
 }
