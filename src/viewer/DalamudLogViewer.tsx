@@ -78,7 +78,6 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
     null,
     "",
     "https://kamori.goats.dev/Plugin/PluginMaster",
-    "https://raw.githubusercontent.com/goatcorp/DalamudPlugins/api6/pluginmaster.json",
     "OFFICIAL"
   ];
 
@@ -88,9 +87,7 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
       name: plugin.Name,
       internalName: plugin.InternalName,
       version: plugin.AssemblyVersion,
-      thirdParty:
-        !pluginSources.includes(plugin.InstalledFromUrl) ||
-        plugin.DownloadLinkInstall === null,
+      thirdParty: !pluginSources.includes(plugin.InstalledFromUrl),
       repoUrl: plugin.RepoUrl,
       loadState:
         troubleshooting.PluginStates[plugin.InternalName] ?? PluginState.Unknown
