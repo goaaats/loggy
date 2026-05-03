@@ -73,7 +73,7 @@ export function LogViewer(props: LogViewerProps) {
 
   if (mobile) {
     return (
-      <div className="flex flex-col w-full h-screen overflow-hidden p-2">
+      <div className="flex flex-col w-full h-screen overflow-x-hidden p-2">
         <div className="flex-shrink-0 mb-2 overflow-auto">{logSelector}</div>
         <hr className="mb-2" />
         <div className="flex-1 min-h-0">{el}</div>
