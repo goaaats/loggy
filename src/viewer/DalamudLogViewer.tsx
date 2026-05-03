@@ -105,7 +105,7 @@ export function DalamudLogViewer(props: DalamudLogViewerProps) {
       <div>
         <h2 className="text-xl">Exception</h2>
         <hr />
-        <pre className="break-normal whitespace-pre-line bg-slate-600 text-slate-200 p-1 rounded-sm">
+        <pre className="wrap-break-word whitespace-pre-line bg-slate-600 text-slate-200 p-3 rounded overflow-auto min-h-[500px]">
           {exception.Info}
         </pre>
         <p>at {exceptionTime}</p>

@@ -28,7 +28,7 @@ export function XLLogViewer(props: XLLogViewerProps) {
       <div>
         <h2 className="text-xl">Exception</h2>
         <hr />
-        <pre className="break-normal whitespace-normal bg-slate-600 text-slate-200 p-1 rounded">
+        <pre className="wrap-break-word whitespace-pre-line bg-slate-600 text-slate-200 p-3 rounded overflow-auto min-h-[500px]">
           {exception.Info}
         </pre>
         <p>at {exceptionTime}</p>
